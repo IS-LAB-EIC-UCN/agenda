@@ -1,47 +1,46 @@
-# War Wildlfy QuickStart
+# Proyecto WildFly - Jakarta EE
 
-This quickstart exposes a simple application with a simple REST service deployed on top of Wildfly 9.0.2.Final. 
-This service can be called from the home page of the application.
+En este proyecto eclipse se presenta una implementación de un sistema de reserva de hotel. El sistema no está terminado, por lo que usted debe completarlo con los métodos descritos y otros que usted estime conveniente.
 
-The example is based on Markus Eisele blog post:
-http://blog.eisele.net/2015/07/running-wildfly-on-openshift-3-with-kubernetes-fabric8-on-windows.html
+El sistema debe ser implementado en *WildFly 30* con conexión a una base de datos *postgresql*. El framework de persistencia utilizado es *JPA*. 
+
+
 
 ### Building
 
-The example can be built with
+Para el deployment (o implementación), en una consola escribir lo siguiente:
 
-    mvn clean install
+    mvn wildfly:deploy
 
-### Running the example in fabric8
+### Ejemplo de Implementación
 
-It is assumed a running Kubernetes platform is already running. If not you can find details how to [get started](http://fabric8.io/guide/getStarted/index.html).
+El proyecto actualmente contempla la creación un método *"main"*, el cual se encuentra implementado en la clase /src/main/java/cl.ucn.presentacion/Main.java
 
-The example can be built and deployed using a single goal:
+Actualmente este método solo crea un cliente y lo persisten en la base de datos.
 
-    mvn -Pf8-local-deploy
 
-When the example runs in fabric8, you can use the OpenShift client tool to inspect the status
+### Implementar los siguientes casos de test unitarios:
 
-To list all the running pods:
+1. **En la Clase Cliente: Cliente - Creación: ** Cliente(String nombre, String email, String telefono): Verifica que la creación de un cliente con información válida funcione correctamente.
 
-    oc get pods
+2. **Cliente - Actualización de Información:** actualizarInformacion(String nuevoTelefono): Asegura que la información del cliente pueda actualizarse correctamente.
 
-Then find the name of the pod that runs this quickstart, and output the logs from the running pods with:
+3. **En la Clase Habitacion: Habitacion - Creación:** Habitacion(int numero, TipoHabitacion tipo, double precio): Verifica la creación de una habitación con información válida.
 
-    oc logs <name of pod>
+4. **Habitacion - Disponibilidad:** estaDisponible(LocalDate fechaInicio, LocalDate fechaFin): Verifica si una habitación está disponible en un rango de fechas.
 
-You can also use the fabric8 [web console](http://fabric8.io/guide/console.html) to manage the
-running pods, and view logs and much more.
+5. **En la Clase Reserva: Reserva - Creación:**  Reserva(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin): Asegura que la creación de una reserva con información válida funcione correctamente.
 
-### Access services using a web browser
+6. **Reserva - Cálculo de Precio:** calcularPrecio(): Verifica que el cálculo del precio de la reserva sea correcto. 
 
-When the application is running, you can use a web browser to access the HTTP service. Assuming that you
-have a [Vagrant setup](http://fabric8.io/guide/getStarted/vagrant.html) you can access the application with
-`http://war-wildfly-default.vagrant.f8/`.
+7. **Reserva - Cancelación: cancelarReserva():** Asegura que la cancelación de una reserva funcione correctamente. 
 
-Notice: As it depends on your OpenShift setup, the hostname (route) might vary. Verify with `oc get routes` which
-hostname is valid for you.
+8. **Reserva - Duración de la Estancia:** calcularDuracionEstancia(): Verifica que el cálculo de la duración de la estancia sea correcto.
+Reserva - Estado de la Reserva: estaCancelada(): Asegura que el estado de la reserva se actualiza correctamente después de la cancelación.
 
-### More details
+9. **En el Sistema (Controlador, Servicio, etc.):** Sistema - Reservar Habitación: reservarHabitacion(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin): Verifica que el proceso de reserva funcione correctamente.
 
-You can find more details about running this [quickstart](http://fabric8.io/guide/quickstarts/running.html) on the website. This also includes instructions how to change the Docker image user and registry.
+10. **Sistema - Consultar Disponibilidad:** consultarDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin): Asegura que el sistema pueda consultar la disponibilidad de habitaciones para un rango de fechas.
+
+11. ** Sistema - Historial de Reservas de un Cliente:** obtenerHistorialReservasCliente(Cliente cliente): Verifica que el sistema pueda proporcionar el historial de reservas de un cliente.
+
