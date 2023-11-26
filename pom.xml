@@ -38,8 +38,6 @@
 			    <artifactId>jakarta.faces-api</artifactId>
 			    <version>4.0.1</version>
 			</dependency>
-
-
 		</dependencies>
 	</dependencyManagement>
 
@@ -75,7 +73,16 @@
 		    <version>6.0.0</version>
 		    <scope>provided</scope>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency>
+		    <groupId>org.junit.jupiter</groupId>
+		    <artifactId>junit-jupiter-api</artifactId>
+		    <version>5.10.1</version>
+		    <scope>test</scope>
+		</dependency>
 
+		
 	</dependencies>
 
 	<build>
@@ -130,8 +137,13 @@
 						<artifactId>maven-surefire-plugin</artifactId>
 						<version>3.2.2</version>
 						<configuration>
-							<skip>true</skip>
-						</configuration>
+			                <skipTests>false</skipTests>
+			                <includes>
+			                    <include>**/*Test.java</include>
+			                    <include>**/Test*.java</include>
+			                    <include>**/*TestCase.java</include>
+			                </includes>
+			            </configuration>
 					</plugin>
 
 					<plugin>

@@ -36,11 +36,12 @@ Actualmente este método solo crea un cliente y lo persisten en la base de datos
 7. **Reserva - Cancelación: cancelarReserva():** Asegura que la cancelación de una reserva funcione correctamente. 
 
 8. **Reserva - Duración de la Estancia:** calcularDuracionEstancia(): Verifica que el cálculo de la duración de la estancia sea correcto.
-Reserva - Estado de la Reserva: estaCancelada(): Asegura que el estado de la reserva se actualiza correctamente después de la cancelación.
 
-9. **En el Sistema (Controlador, Servicio, etc.):** Sistema - Reservar Habitación: reservarHabitacion(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin): Verifica que el proceso de reserva funcione correctamente.
+9. **Reserva - Estado de la Reserva:** estaCancelada(): Asegura que el estado de la reserva se actualiza correctamente después de la cancelación.
 
-10. **Sistema - Consultar Disponibilidad:** consultarDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin): Asegura que el sistema pueda consultar la disponibilidad de habitaciones para un rango de fechas.
+10. **En el Sistema (Controlador, Servicio, etc.):** Sistema - Reservar Habitación: reservarHabitacion(Cliente cliente, Habitacion habitacion, LocalDate fechaInicio, LocalDate fechaFin): Verifica que el proceso de reserva funcione correctamente.
 
-11. ** Sistema - Historial de Reservas de un Cliente:** obtenerHistorialReservasCliente(Cliente cliente): Verifica que el sistema pueda proporcionar el historial de reservas de un cliente.
+11. **Sistema - Consultar Disponibilidad:** consultarDisponibilidad(LocalDate fechaInicio, LocalDate fechaFin): Asegura que el sistema pueda consultar la disponibilidad de habitaciones para un rango de fechas.
+
+12. ** Sistema - Historial de Reservas de un Cliente:** obtenerHistorialReservasCliente(Cliente cliente): Verifica que el sistema pueda proporcionar el historial de reservas de un cliente.
 

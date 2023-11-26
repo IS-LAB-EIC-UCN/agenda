@@ -6,6 +6,7 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.Query;
 
 @Stateless
 @LocalBean
@@ -17,7 +18,10 @@ public class StorageCliente implements IStorageCliente{
 	@Override
 	public Cliente getCliente(int rut) {
 		// TODO Auto-generated method stub
-		return null;
+		Query q = em.createQuery("SELECT p FROM Cliente p WHERE p.rut = :rut");
+		q.setParameter("rut", rut);
+		Cliente cliente = (Cliente) q.getSingleResult();
+		return cliente;
 	}
 
 	@Override
