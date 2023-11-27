@@ -11,7 +11,7 @@ import jakarta.ejb.LocalBean;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.Query;
+import jakarta.persistence.TypedQuery;
 
 @Stateless
 @LocalBean
@@ -43,9 +43,9 @@ public class StorageReserva implements IStorageReserva {
 	public String imprimirReservas(int numeroHabitacion) {
 		// TODO Auto-generated method stub
 		String info = "";
-		Query q = em.createQuery("SELECT r FROM Reserva r JOIN r.habitaciones h WHERE h.numero = :numeroHabitacion");
+		TypedQuery<Reserva> q = em.createQuery("SELECT r FROM Reserva r JOIN r.habitaciones h WHERE h.numero = :numeroHabitacion", Reserva.class);
 		q.setParameter("numeroHabitacion", numeroHabitacion);
-		List<Reserva> reservas = (List<Reserva>) q.getResultList();
+		List<Reserva> reservas = q.getResultList();
 		for (Reserva reserva : reservas) {
 			info = info + "\n";
 			info = info + "N Reserva: " + reserva.getIdReserva() + "\n";
@@ -62,9 +62,9 @@ public class StorageReserva implements IStorageReserva {
 	public Reserva verificarDisponibilidad(int numeroHabitacion, DateTime fechaEntrada, DateTime fechaSalida ) {
 		// TODO Auto-generated method stub
 
-		Query q = em.createQuery("SELECT r FROM Reserva r JOIN r.habitaciones h WHERE h.numero = :numeroHabitacion");
+		TypedQuery<Reserva> q = em.createQuery("SELECT r FROM Reserva r JOIN r.habitaciones h WHERE h.numero = :numeroHabitacion",  Reserva.class);
 		q.setParameter("numeroHabitacion", numeroHabitacion);
-		List<Reserva> reservas = (List<Reserva>) q.getResultList();
+		List<Reserva> reservas = q.getResultList();
 
 		for (Reserva reserva : reservas) {
 
